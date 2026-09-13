@@ -2,10 +2,10 @@ import Foundation
 import os
 
 /// Minimal logging. Uses the unified logging system (visible in Console.app and
-/// `log stream --predicate 'subsystem == "com.example.startupmovie"'`) and also
+/// `log stream --predicate 'subsystem == "com.principledproductions.startupmovie"'`) and also
 /// writes to stderr so it shows up in the LaunchAgent's StandardErrorPath log.
 enum Log {
-    private static let logger = Logger(subsystem: "com.example.startupmovie",
+    private static let logger = Logger(subsystem: "com.principledproductions.startupmovie",
                                        category: "startup-movie")
 
     static func info(_ message: String) {

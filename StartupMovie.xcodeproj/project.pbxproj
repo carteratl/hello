@@ -211,7 +211,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.startupmovie;
+				PRODUCT_BUNDLE_IDENTIFIER = com.principledproductions.startupmovie;
 				PRODUCT_NAME = "Startup Movie";
 				SWIFT_VERSION = 5.0;
 			};
@@ -229,7 +229,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.startupmovie;
+				PRODUCT_BUNDLE_IDENTIFIER = com.principledproductions.startupmovie;
 				PRODUCT_NAME = "Startup Movie";
 				SWIFT_VERSION = 5.0;
 			};

@@ -13,6 +13,6 @@ sudo installer -pkg "$PKG" -target /
 echo
 echo "Installed. To activate now without rebooting, log out and back in, or run:"
 echo "    ./scripts/reset-state.sh   # so this boot counts as 'not yet played'"
-echo "    launchctl bootstrap gui/\$(id -u) '/Library/LaunchAgents/com.example.startupmovie.plist'"
+echo "    launchctl bootstrap gui/\$(id -u) '/Library/LaunchAgents/com.principledproductions.startupmovie.plist'"
 echo
 echo "For a true boot test: restart the Mac and log in."

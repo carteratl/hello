@@ -43,7 +43,7 @@ managed .pkg install
       │
       ▼
 /Applications/Startup Movie.app          ← the agent app (LSUIElement, no Dock/menu)
-/Library/LaunchAgents/com.example.startupmovie.plist   ← launches app at each GUI login
+/Library/LaunchAgents/com.principledproductions.startupmovie.plist   ← launches app at each GUI login
 /Library/Application Support/Startup Movie/last-played-boot  ← once-per-boot state (shared)
       │
    full boot ──► user logs in ──► LaunchAgent runs the app in the user session
@@ -84,7 +84,7 @@ controls. The cursor is hidden during playback and restored before exit.
 
 ## How the post-boot launch works
 
-A **machine-wide LaunchAgent** at `/Library/LaunchAgents/com.example.startupmovie.plist`
+A **machine-wide LaunchAgent** at `/Library/LaunchAgents/com.principledproductions.startupmovie.plist`
 is the launch mechanism. This is the correct, supported approach for a
 package-deployed app that must run in the user's **graphical** session:
 
@@ -259,7 +259,7 @@ directory.
 **no play**. 5. Lock. 6. Unlock → **no play**. 7. Log out. 8. Log back in
 (same boot) → **no play**. 9. Restart again. 10. Log in → **video plays**.
 
-To watch decisions live: `log stream --predicate 'subsystem == "com.example.startupmovie"'`
+To watch decisions live: `log stream --predicate 'subsystem == "com.principledproductions.startupmovie"'`
 (or read `/tmp/startupmovie.err.log`).
 
 ### 3. Deployment testing
@@ -301,9 +301,9 @@ Verify installed paths:
 
 ```bash
 ls -l "/Applications/Startup Movie.app"
-ls -l "/Library/LaunchAgents/com.example.startupmovie.plist"
+ls -l "/Library/LaunchAgents/com.principledproductions.startupmovie.plist"
 ls -ld "/Library/Application Support/Startup Movie"
-pkgutil --pkg-info com.example.startupmovie.pkg
+pkgutil --pkg-info com.principledproductions.startupmovie.pkg
 ```
 
 Then **restart and log in** for a true boot test. (To activate in the current
@@ -422,12 +422,12 @@ All version metadata is centralized in `config.sh`:
 |-------|----------------------|----------------|
 | Application version | `APP_VERSION` | `CFBundleShortVersionString` |
 | Build number | `BUILD_NUMBER` | `CFBundleVersion` |
-| App identifier | `APP_BUNDLE_ID` | `CFBundleIdentifier` (`com.example.startupmovie`) |
-| Package identifier | `PKG_IDENTIFIER` | pkg id (`com.example.startupmovie.pkg`) |
+| App identifier | `APP_BUNDLE_ID` | `CFBundleIdentifier` (`com.principledproductions.startupmovie`) |
+| Package identifier | `PKG_IDENTIFIER` | pkg id (`com.principledproductions.startupmovie.pkg`) |
 | Package version | `PKG_VERSION` | pkg + distribution version |
 
 To cut a new version: bump the values in `config.sh` and run `./build.sh`.
-Replace the placeholder `com.example` organization prefix with your real
+Replace the placeholder `com.principledproductions` organization prefix with your real
 reverse-DNS identifier.
 
 ---

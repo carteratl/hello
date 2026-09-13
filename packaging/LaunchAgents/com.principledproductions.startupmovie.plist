@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Label</key>
-	<string>com.example.startupmovie</string>
+	<string>com.principledproductions.startupmovie</string>
 
 	<!-- Launch the app's executable directly in the user's GUI session. -->
 	<key>ProgramArguments</key>

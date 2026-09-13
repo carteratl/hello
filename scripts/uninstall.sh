@@ -3,11 +3,11 @@
 set -euo pipefail
 
 APP_NAME="Startup Movie"
-LABEL="com.example.startupmovie"
+LABEL="com.principledproductions.startupmovie"
 APP_PATH="/Applications/${APP_NAME}.app"
 AGENT_PLIST="/Library/LaunchAgents/${LABEL}.plist"
 STATE_DIR="/Library/Application Support/${APP_NAME}"
-PKG_ID="com.example.startupmovie.pkg"
+PKG_ID="com.principledproductions.startupmovie.pkg"
 
 echo "Unloading LaunchAgent for the current GUI user (if loaded)..."
 launchctl bootout "gui/$(id -u)/${LABEL}" 2>/dev/null || true

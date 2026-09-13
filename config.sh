@@ -5,9 +5,9 @@
 # --- Identity ---------------------------------------------------------------
 APP_NAME="Startup Movie"                       # .app bundle display name
 APP_EXECUTABLE="StartupMovie"                   # Mach-O executable name (no spaces)
-APP_BUNDLE_ID="com.example.startupmovie"        # reverse-DNS app identifier
-PKG_IDENTIFIER="com.example.startupmovie.pkg"   # reverse-DNS installer identifier
-LAUNCH_AGENT_LABEL="com.example.startupmovie"   # LaunchAgent label + plist name
+APP_BUNDLE_ID="com.principledproductions.startupmovie"        # reverse-DNS app identifier
+PKG_IDENTIFIER="com.principledproductions.startupmovie.pkg"   # reverse-DNS installer identifier
+LAUNCH_AGENT_LABEL="com.principledproductions.startupmovie"   # LaunchAgent label + plist name
 
 # --- Versioning -------------------------------------------------------------
 APP_VERSION="1.0.0"      # CFBundleShortVersionString (marketing version)
