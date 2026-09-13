@@ -7,6 +7,9 @@
 #   ./build.sh app          Build only the .app bundle
 #   ./build.sh pkg          Build the .app and the .pkg (default)
 #   ./build.sh notarize     Notarize + staple dist/StartupMovie.pkg (needs NOTARY_PROFILE)
+#   ./build.sh release [tag] Build the pkg and publish a GitHub Release with the
+#                           pkg + install.sh attached (needs the `gh` CLI, authed).
+#                           Tag defaults to v<APP_VERSION>.
 #   ./build.sh clean        Remove build/ and dist/ outputs
 #
 # Signing is controlled entirely by environment variables (see config.sh):
@@ -206,6 +209,60 @@ notarize() {
     log "Notarized and stapled: $FINAL_PKG"
 }
 
+release() {
+    command -v gh >/dev/null 2>&1 || die "GitHub CLI (gh) not found. Install it (brew install gh) or create the release manually."
+    gh auth status >/dev/null 2>&1 || die "gh is not authenticated. Run: gh auth login"
+
+    build_pkg   # build + sign the package first
+
+    local tag="${1:-v$APP_VERSION}"
+    local sha; sha="$(shasum -a 256 "$FINAL_PKG" | awk '{print $1}')"
+    local repo; repo="$(gh repo view --json nameWithOwner -q .nameWithOwner)"
+    local signed_line; signed_line="$( [ -n "${DEVELOPER_ID_INSTALLER}" ] && echo "Developer ID Installer" || echo "no (ad-hoc — fine for manual local install, not for MDM)" )"
+
+    if [ -n "$(git status --porcelain)" ]; then
+        warn "Working tree has uncommitted changes; the release tag will point at commit $(git rev-parse --short HEAD)."
+    fi
+
+    local notes
+    notes="$(cat <<EOF
+Startup Movie ${APP_VERSION} (build ${BUILD_NUMBER})
+
+- Bundle ID: \`${APP_BUNDLE_ID}\`
+- SHA-256: \`${sha}\`
+- Signed: ${signed_line}
+
+**Install on a Mac (Terminal):**
+1. Download \`StartupMovie.pkg\` and \`install.sh\` from this release into the same folder.
+2. \`bash install.sh\`
+
+The movie then plays once at the next restart, right after login.
+EOF
+)"
+
+    if gh release view "$tag" >/dev/null 2>&1; then
+        info "Release $tag already exists — updating its assets"
+        gh release upload "$tag" "$FINAL_PKG" "$ROOT/scripts/install.sh" --clobber
+    else
+        info "Creating release $tag"
+        gh release create "$tag" "$FINAL_PKG" "$ROOT/scripts/install.sh" \
+            --title "Startup Movie $APP_VERSION" --notes "$notes"
+    fi
+
+    local base="https://github.com/${repo}/releases/download/${tag}"
+    echo
+    log "Release ready: https://github.com/${repo}/releases/tag/${tag}"
+    printf '    Package URL : %s/StartupMovie.pkg\n' "$base"
+    printf '    SHA-256     : %s\n' "$sha"
+    echo   "    One-liner for the target Mac (run in Terminal):"
+    printf '      curl -fL -O %s/StartupMovie.pkg -O %s/install.sh && bash install.sh\n' "$base" "$base"
+
+    if [ "$(gh repo view --json visibility -q .visibility 2>/dev/null)" != "PUBLIC" ]; then
+        warn "This repo is PRIVATE, so those download URLs require GitHub auth and will fail on an unmanaged Mac."
+        warn "Either make the repo public, or download the two files yourself and hand them over directly."
+    fi
+}
+
 clean() {
     log "Removing build/ and dist/"
     rm -rf "$BUILD_DIR" "$DIST_DIR"
@@ -216,6 +273,7 @@ case "${1:-pkg}" in
     app)      build_app ;;
     pkg)      build_pkg ;;
     notarize) notarize ;;
+    release)  release "${2:-}" ;;
     clean)    clean ;;
-    *)        die "Unknown command '$1' (use: app | pkg | notarize | clean)" ;;
+    *)        die "Unknown command '$1' (use: app | pkg | notarize | release | clean)" ;;
 esac
