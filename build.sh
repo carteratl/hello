@@ -161,6 +161,17 @@ build_pkg() {
     sign_pkg "$unsigned"
     verify_pkg
     log "Done. Installer: $FINAL_PKG"
+
+    # Apple Business "macOS Packages" registers a package by URL + SHA-256 hash
+    # + bundle id, so surface exactly those values for convenience.
+    echo
+    log "Apple Business registration details"
+    printf '    Bundle ID : %s\n' "$APP_BUNDLE_ID"
+    printf '    Version   : %s\n' "$APP_VERSION"
+    printf '    SHA-256   : %s\n' "$(shasum -a 256 "$FINAL_PKG" | awk '{print $1}')"
+    if [ -z "${DEVELOPER_ID_INSTALLER}" ]; then
+        warn "This package is UNSIGNED. MDM/Blueprint install requires a Developer ID Installer signature (set DEVELOPER_ID_INSTALLER)."
+    fi
 }
 
 sign_pkg() {

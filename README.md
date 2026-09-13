@@ -29,7 +29,7 @@ relaunching the app itself.
 - [Signing](#signing)
 - [Notarization](#notarization)
 - [Verifying signatures](#verifying-signatures)
-- [Which artifact to upload to Apple Business](#which-artifact-to-upload-to-apple-business)
+- [Which artifact to deploy via Apple Business](#which-artifact-to-deploy-via-apple-business)
 - [Deploying via an Apple Business Blueprint](#deploying-via-an-apple-business-blueprint)
 - [Versioning](#versioning)
 - [Failure behavior](#failure-behavior)
@@ -347,12 +347,13 @@ package unsigned — fine for local development, not for distribution.
 
 ## Notarization
 
-Notarization **is advisable** for this deployment model. Although MDM push-install
-of a Developer ID-signed pkg can bypass Gatekeeper prompts, notarizing (and
-stapling) is the robust, future-proof choice: it keeps the package valid if it is
-ever installed outside MDM, and aligns with Apple's expectations for distributed
-software. Notarization requires Developer ID signing (above) and hardened runtime
-(already applied to the app).
+Notarization is **not required** for MDM/Blueprint deployment: managed installs
+via `InstallEnterpriseApplication` bypass Gatekeeper, so a Developer ID Installer
+*signature* alone is what the Blueprint path needs. Notarizing (and stapling) is
+still worthwhile if the same `.pkg` might ever be installed **outside** MDM
+(e.g. handed to someone to double-click), since that path is subject to
+Gatekeeper. Notarization requires Developer ID signing (above) and hardened
+runtime (already applied to the app).
 
 One-time credential setup:
 
@@ -388,29 +389,67 @@ xcrun stapler validate dist/StartupMovie.pkg
 
 ---
 
-## Which artifact to upload to Apple Business
+## Which artifact to deploy via Apple Business
 
-Upload **`dist/StartupMovie.pkg`** — the signed (and, recommended, notarized)
-distribution package. That single file is the deployable artifact; it contains
-the app, the LaunchAgent, and the postinstall that configures the shared state.
+The deployable artifact is **`dist/StartupMovie.pkg`** built with a
+**Developer ID Installer** signature (see [Signing](#signing)). It is a
+`productbuild` distribution package containing the app, the LaunchAgent, and the
+postinstall that configures the shared state.
+
+**Signing is required for MDM/Blueprint installation.** Apple Business built-in
+device management installs packages via the MDM `InstallEnterpriseApplication`
+mechanism, which only accepts a **developer-signed distribution package** — i.e.
+a `productbuild` package signed with a Developer ID Installer certificate.
+Unsigned/ad-hoc packages install fine locally (`sudo installer`) for a proof of
+concept, but will **not** install through a Blueprint. Notarization is *not*
+required for MDM-managed installs (they bypass Gatekeeper), though it does no
+harm.
+
+Getting the certificate requires enrolling in the **Apple Developer Program**
+($99/yr) — this is separate from your (free) Apple Business account. From the
+Developer account you create a "Developer ID Installer" certificate (and a
+"Developer ID Application" certificate to sign the app), then export the
+identities and rebuild (see [Signing](#signing)).
 
 ---
 
 ## Deploying via an Apple Business Blueprint
 
+Apple Business built-in device management does **not** take a file upload for
+custom packages. Instead you **host the signed `.pkg` at an https URL** and
+register it by URL + hash. `./build.sh` prints the exact values you need
+(Bundle ID, Version, SHA-256) at the end of a build.
+
 ```
-Build app  →  Build/sign (+notarize) StartupMovie.pkg
-           →  Upload package to Apple Business → macOS Packages
-           →  Add the package to a Blueprint
-           →  Assign the Blueprint to the company Mac(s)
-           →  Package installs on the managed Mac (unattended)
-           →  Next full boot → user logs in → LaunchAgent runs the app
-           →  App sees a new boot id → black fullscreen → plays startup.mp4 once → quits
+Build + sign the pkg (Developer ID Installer)      ./build.sh
+      │   (prints Bundle ID / Version / SHA-256)
+      ▼
+Host StartupMovie.pkg at an https URL               (must auto-download, not a landing page)
+      ▼
+Apple Business → Devices → macOS Packages → add a package
+      • Download URL (https, auto-downloads)
+      • SHA-256 hash   ← integrity check; from build output or `shasum -a 256`
+      • Bundle ID      ← com.principledproductions.startupmovie
+      • Version / name / icon
+      ▼
+Add the package to a Blueprint  →  Assign the Blueprint to the Mac(s)
+      ▼
+Package installs unattended (InstallEnterpriseApplication)
+      ▼
+Next full boot → user logs in → LaunchAgent runs the app
+      ▼
+App sees a new boot id → black fullscreen → plays startup.mp4 once → quits
 ```
 
-The package is designed for exactly this: no interactive installer prompts, no
-manual `.app` copy, no manually configured Login Items, deterministic paths, and
-in-place upgrade when a newer package version is pushed.
+The package is designed for exactly this: signed distribution package, no
+interactive prompts, no manual `.app` copy, no manually configured Login Items,
+deterministic paths, and in-place upgrade when a newer version is hosted/pointed
+to. To ship an update, bump the version in `config.sh`, rebuild+sign, host the
+new file, and update the package's URL/hash/version in Apple Business.
+
+Sources: Apple's [Create a package in Apple Business](https://support.apple.com/guide/business/create-a-package-axm8e397e77d/web)
+and [Intro to deploying packages](https://support.apple.com/guide/business/intro-to-deploying-packages-axmeeed343b0/web);
+[Distribute packages to Mac computers](https://support.apple.com/guide/deployment/distribute-packages-to-mac-computers-dep873c25ac4/web).
 
 ---
 
