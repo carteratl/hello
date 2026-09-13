@@ -1,0 +1,32 @@
+#!/bin/bash
+# postinstall — runs as root during package installation.
+#
+# Responsibilities:
+#   * Create the machine-wide state directory and state file, world-writable so
+#     the LaunchAgent (which runs as the logged-in, non-root user) can record
+#     "the movie already played for this boot".
+#   * Reset the recorded boot id so a freshly installed/updated package plays on
+#     the next login after boot, regardless of prior state.
+#
+# The LaunchAgent plist is installed by the package payload into
+# /Library/LaunchAgents. It is loaded automatically by launchd at the next
+# graphical login (i.e. after the next boot/restart in the Blueprint flow), so
+# this script deliberately does NOT bootstrap/run it — that avoids playing the
+# movie in the middle of an unattended install.
+
+set -e
+
+APP_NAME="Startup Movie"
+STATE_DIR="/Library/Application Support/${APP_NAME}"
+STATE_FILE="${STATE_DIR}/last-played-boot"
+
+mkdir -p "${STATE_DIR}"
+
+# World-writable dir + file so any user's GUI session can update it. A single
+# shared file gives "once per boot across all users". flock in the app protects
+# against concurrent writers (e.g. Fast User Switching).
+: > "${STATE_FILE}"                # truncate (create if missing); empty == "not yet played"
+chmod 0777 "${STATE_DIR}"
+chmod 0666 "${STATE_FILE}"
+
+exit 0

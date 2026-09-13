@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.example.startupmovie</string>
+
+	<!-- Launch the app's executable directly in the user's GUI session. -->
+	<key>ProgramArguments</key>
+	<array>
+		<string>/Applications/Startup Movie.app/Contents/MacOS/StartupMovie</string>
+	</array>
+
+	<!-- Run when the agent is loaded, i.e. when a graphical login session
+	     begins. The app itself enforces once-per-boot semantics, so it is fine
+	     for this trigger to be login-oriented. -->
+	<key>RunAtLoad</key>
+	<true/>
+
+	<!-- Only load in a graphical (Aqua) login session; never in non-GUI
+	     contexts. This is a machine-wide agent in /Library/LaunchAgents, so it
+	     is evaluated once per user GUI session. -->
+	<key>LimitLoadToSessionType</key>
+	<string>Aqua</string>
+
+	<!-- Interactive UI process. -->
+	<key>ProcessType</key>
+	<string>Interactive</string>
+
+	<!-- Do not relaunch. The app runs once and exits; keep-alive would fight
+	     the once-per-boot design. -->
+	<key>KeepAlive</key>
+	<false/>
+
+	<!-- Logs for troubleshooting during testing. -->
+	<key>StandardOutPath</key>
+	<string>/tmp/startupmovie.out.log</string>
+	<key>StandardErrorPath</key>
+	<string>/tmp/startupmovie.err.log</string>
+</dict>
+</plist>

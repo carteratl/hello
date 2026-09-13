@@ -1,0 +1,19 @@
+# Build outputs
+build/
+dist/
+
+# Signing secrets — never commit. Put local identities in an untracked file
+# (e.g. signing.local.sh) that you `source` before building.
+signing.local.sh
+*.p12
+*.cer
+*.provisionprofile
+
+# macOS cruft
+.DS_Store
+._*
+
+# Xcode user state
+xcuserdata/
+*.xcuserstate
+DerivedData/

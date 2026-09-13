@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- productbuild distribution definition.
+     Placeholders (__APP_TITLE__, __MIN_MACOS__, __PKG_IDENTIFIER__,
+     __PKG_VERSION__, __COMPONENT_PKG__) are substituted by build.sh. -->
+<installer-gui-script minSpecVersion="1">
+    <title>__APP_TITLE__</title>
+
+    <!-- Unattended, no user interaction, install for all users on the system. -->
+    <options customize="never" require-scripts="false" rootVolumeOnly="true"/>
+    <domains enable_localSystem="true"/>
+
+    <volume-check>
+        <allowed-os-versions>
+            <os-version min="__MIN_MACOS__"/>
+        </allowed-os-versions>
+    </volume-check>
+
+    <choices-outline>
+        <line choice="default">
+            <line choice="__PKG_IDENTIFIER__"/>
+        </line>
+    </choices-outline>
+    <choice id="default"/>
+    <choice id="__PKG_IDENTIFIER__" visible="false">
+        <pkg-ref id="__PKG_IDENTIFIER__"/>
+    </choice>
+
+    <pkg-ref id="__PKG_IDENTIFIER__" version="__PKG_VERSION__">__COMPONENT_PKG__</pkg-ref>
+</installer-gui-script>

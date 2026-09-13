@@ -1,0 +1,262 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1C0000000000000000000001 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0000000000000000000001 /* main.swift */; };
+		1C0000000000000000000002 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0000000000000000000002 /* AppDelegate.swift */; };
+		1C0000000000000000000003 /* BootSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0000000000000000000003 /* BootSession.swift */; };
+		1C0000000000000000000004 /* BootStateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0000000000000000000004 /* BootStateStore.swift */; };
+		1C0000000000000000000005 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0000000000000000000005 /* Config.swift */; };
+		1C0000000000000000000006 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0000000000000000000006 /* Log.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1A0000000000000000000006 /* Startup Movie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Startup Movie.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A0000000000000000000011 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = app/Info.plist; sourceTree = SOURCE_ROOT; };
+		1B0000000000000000000001 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = main.swift; path = app/Sources/main.swift; sourceTree = SOURCE_ROOT; };
+		1B0000000000000000000002 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = app/Sources/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
+		1B0000000000000000000003 /* BootSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BootSession.swift; path = app/Sources/BootSession.swift; sourceTree = SOURCE_ROOT; };
+		1B0000000000000000000004 /* BootStateStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BootStateStore.swift; path = app/Sources/BootStateStore.swift; sourceTree = SOURCE_ROOT; };
+		1B0000000000000000000005 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Config.swift; path = app/Sources/Config.swift; sourceTree = SOURCE_ROOT; };
+		1B0000000000000000000006 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Log.swift; path = app/Sources/Log.swift; sourceTree = SOURCE_ROOT; };
+		1B0000000000000000000007 /* hellokojo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = hellokojo.mp4; path = videos/hellokojo.mp4; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1A000000000000000000000E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1A0000000000000000000002 = {
+			isa = PBXGroup;
+			children = (
+				1A0000000000000000000004 /* app */,
+				1B0000000000000000000007 /* hellokojo.mp4 */,
+				1A0000000000000000000003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1A0000000000000000000003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1A0000000000000000000006 /* Startup Movie.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1A0000000000000000000004 /* app */ = {
+			isa = PBXGroup;
+			children = (
+				1B0000000000000000000001 /* main.swift */,
+				1B0000000000000000000002 /* AppDelegate.swift */,
+				1B0000000000000000000003 /* BootSession.swift */,
+				1B0000000000000000000004 /* BootStateStore.swift */,
+				1B0000000000000000000005 /* Config.swift */,
+				1B0000000000000000000006 /* Log.swift */,
+				1A0000000000000000000011 /* Info.plist */,
+			);
+			name = app;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1A0000000000000000000005 /* StartupMovie */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1A0000000000000000000008 /* Build configuration list for PBXNativeTarget "StartupMovie" */;
+			buildPhases = (
+				1A000000000000000000000D /* Sources */,
+				1A000000000000000000000E /* Frameworks */,
+				1A000000000000000000000F /* Resources */,
+				1A0000000000000000000010 /* Bundle startup.mp4 */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StartupMovie;
+			productName = "Startup Movie";
+			productReference = 1A0000000000000000000006 /* Startup Movie.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1A0000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					1A0000000000000000000005 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = 1A0000000000000000000007 /* Build configuration list for PBXProject "StartupMovie" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1A0000000000000000000002;
+			productRefGroup = 1A0000000000000000000003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1A0000000000000000000005 /* StartupMovie */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1A000000000000000000000F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1A0000000000000000000010 /* Bundle startup.mp4 */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/videos/hellokojo.mp4",
+			);
+			name = "Bundle startup.mp4";
+			outputPaths = (
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/startup.mp4",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "set -e\n# Copy the source movie into the bundle as startup.mp4 so the app can\n# load it by a stable name. Change SRC to swap the video.\nSRC=\"$SRCROOT/videos/hellokojo.mp4\"\nDEST=\"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/startup.mp4\"\nmkdir -p \"$(dirname \"$DEST\")\"\ncp \"$SRC\" \"$DEST\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1A000000000000000000000D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C0000000000000000000001 /* main.swift in Sources */,
+				1C0000000000000000000002 /* AppDelegate.swift in Sources */,
+				1C0000000000000000000003 /* BootSession.swift in Sources */,
+				1C0000000000000000000004 /* BootStateStore.swift in Sources */,
+				1C0000000000000000000005 /* Config.swift in Sources */,
+				1C0000000000000000000006 /* Log.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1A0000000000000000000009 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1A000000000000000000000A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		1A000000000000000000000B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = app/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.startupmovie;
+				PRODUCT_NAME = "Startup Movie";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		1A000000000000000000000C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = app/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.startupmovie;
+				PRODUCT_NAME = "Startup Movie";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1A0000000000000000000007 /* Build configuration list for PBXProject "StartupMovie" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1A0000000000000000000009 /* Debug */,
+				1A000000000000000000000A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1A0000000000000000000008 /* Build configuration list for PBXNativeTarget "StartupMovie" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1A000000000000000000000B /* Debug */,
+				1A000000000000000000000C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1A0000000000000000000001 /* Project object */;
+}
