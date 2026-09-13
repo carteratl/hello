@@ -241,10 +241,10 @@ EOF
 )"
 
     if gh release view "$tag" >/dev/null 2>&1; then
-        info "Release $tag already exists — updating its assets"
+        log "Release $tag already exists — updating its assets"
         gh release upload "$tag" "$FINAL_PKG" "$ROOT/scripts/install.sh" --clobber
     else
-        info "Creating release $tag"
+        log "Creating release $tag"
         gh release create "$tag" "$FINAL_PKG" "$ROOT/scripts/install.sh" \
             --title "Startup Movie $APP_VERSION" --notes "$notes"
     fi
