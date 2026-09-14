@@ -15,9 +15,9 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.1</string>
+	<string>1.0.2</string>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>3</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>12.0</string>
 	<key>NSPrincipalClass</key>
@@ -37,6 +37,6 @@
 	<key>SMMovieResourceExtension</key>
 	<string>mp4</string>
 	<key>SMStartupDelaySeconds</key>
-	<real>0.0</real>
+	<real>0.1</real>
 </dict>
 </plist>
