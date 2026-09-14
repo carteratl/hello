@@ -106,7 +106,9 @@ sign_app() {
 
 # ---------------------------------------------------------------------------
 build_pkg() {
-    [ -d "$APP_BUNDLE" ] || build_app
+    # Always rebuild the app so config.sh/source/Info.plist changes propagate
+    # into the package (rebuilding is only a couple of seconds).
+    build_app
 
     log "Staging package payload"
     rm -rf "$STAGE_DIR"

@@ -10,12 +10,12 @@ PKG_IDENTIFIER="com.principledproductions.startupmovie.pkg"   # reverse-DNS inst
 LAUNCH_AGENT_LABEL="com.principledproductions.startupmovie"   # LaunchAgent label + plist name
 
 # --- Versioning -------------------------------------------------------------
-APP_VERSION="1.0.0"      # CFBundleShortVersionString (marketing version)
-BUILD_NUMBER="1"         # CFBundleVersion (build number)
-PKG_VERSION="1.0.0"      # installer package version
+APP_VERSION="1.0.1"      # CFBundleShortVersionString (marketing version)
+BUILD_NUMBER="2"         # CFBundleVersion (build number)
+PKG_VERSION="1.0.1"      # installer package version
 
 # --- Behavior ---------------------------------------------------------------
-STARTUP_DELAY="1.0"      # seconds to wait after login before presenting video
+STARTUP_DELAY="0"        # seconds to wait after login before presenting video (0 = immediate)
 MIN_MACOS="12.0"         # LSMinimumSystemVersion / deployment target
 
 # --- Paths ------------------------------------------------------------------

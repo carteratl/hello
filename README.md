@@ -51,7 +51,7 @@ managed .pkg install
       ▼
    app: is this boot already recorded?
         ├─ yes → exit immediately (sleep/wake, 2nd login, relaunch, FUS…)
-        └─ no  → record boot id → wait ~1s → black fullscreen → play startup.mp4 once
+        └─ no  → record boot id → (optional delay) → black fullscreen → play startup.mp4 once
                  → on end/failure/Esc/watchdog → restore cursor → quit
 ```
 
